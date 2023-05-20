@@ -190,7 +190,7 @@ export default {
       } else {
         if (item.type === 'put') {
           axios
-            .put('https://skripsi-fauzan.000webhostapp.com/petugas/posko/put', {
+            .put('http://localhost/skripsi/petugas/posko/put', {
               posko_id: item.id,
               nama_posko: item.nama_posko,
               nama_pj_posko: item.nama_pj_posko,
@@ -211,7 +211,7 @@ export default {
             })
         } else if (item.type === 'post') {
           axios
-            .post('https://skripsi-fauzan.000webhostapp.com/petugas/posko/post', {
+            .post('http://localhost/skripsi/petugas/posko/post', {
               nama_posko: item.nama_posko,
               nama_pj_posko: item.nama_pj_posko,
               hp_pj_posko: item.hp_pj_posko,
@@ -239,7 +239,7 @@ export default {
       } else {
         if (item.type === 'put') {
           axios
-            .put('https://skripsi-fauzan.000webhostapp.com/petugas/korban/put', {
+            .put('http://localhost/skripsi/petugas/korban/put', {
               id: item.id,
               nama: item.nama,
               usia: item.usia,
@@ -262,7 +262,7 @@ export default {
             })
         } else if (item.type === 'post') {
           axios
-            .post('https://skripsi-fauzan.000webhostapp.com/petugas/korban/post', {
+            .post('http://localhost/skripsi/petugas/korban/post', {
               nama: item.nama,
               usia: item.usia,
               jenis_kelamin: item.jenis_kelamin,
