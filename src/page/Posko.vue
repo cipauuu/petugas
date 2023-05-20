@@ -313,7 +313,7 @@ export default {
         )
       } else {
         axios
-          .post('https://skripsi-fauzan.000webhostapp.com/skripsi/petugas/posko/post', {
+          .post('https://skripsi-fauzan.000webhostapp.com/petugas/posko/post', {
             nama_posko: this.formTambah.nama_posko,
             nama_pj_posko: this.formTambah.nama_pj_posko,
             hp_pj_posko: this.formTambah.hp_pj_posko,
@@ -385,7 +385,7 @@ export default {
         )
       } else {
         axios
-          .put('https://skripsi-fauzan.000webhostapp.com/skripsi/petugas/posko/put', {
+          .put('https://skripsi-fauzan.000webhostapp.com/petugas/posko/put', {
             posko_id: this.formEdit.id,
             nama_posko: this.formEdit.nama_posko,
             nama_pj_posko: this.formEdit.nama_pj_posko,
@@ -416,7 +416,7 @@ export default {
     submitFormDelete(id, name) {
       if (confirm(`Anda yakin untuk menghapus data ${name} ini?`)) {
         axios
-          .post('https://skripsi-fauzan.000webhostapp.com/skripsi/petugas/posko/delete', {
+          .post('https://skripsi-fauzan.000webhostapp.com/petugas/posko/delete', {
             id: id,
           })
           .then(() => {
@@ -433,7 +433,7 @@ export default {
     },
     getDataPosko() {
       axios
-        .get('https://skripsi-fauzan.000webhostapp.com/skripsi/petugas/posko/get')
+        .get('https://skripsi-fauzan.000webhostapp.com/petugas/posko/get')
         .then((response) => {
           this.allItems = response.data.map((item, index) => {
             return {
