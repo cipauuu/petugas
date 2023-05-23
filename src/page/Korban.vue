@@ -357,7 +357,7 @@ export default {
           )
         } else {
           axios
-            .post('http://localhost/skripsi/petugas/korban/post', {
+            .post('https://skripsi-fauzan.000webhostapp.com/petugas/korban/post', {
               nama: this.formTambah.nama,
               usia: this.formTambah.usia,
               jenis_kelamin: this.formTambah.jenis_kelamin,
@@ -437,7 +437,7 @@ export default {
           )
         } else {
           axios
-            .put('http://localhost/skripsi/petugas/korban/put', {
+            .put('https://skripsi-fauzan.000webhostapp.com/petugas/korban/put', {
               id: this.formEdit.id,
               nama: this.formEdit.nama,
               usia: this.formEdit.usia,
@@ -470,7 +470,7 @@ export default {
     submitFormDelete(id, name) {
       if (confirm(`Anda yakin untuk menghapus data ${name} ini?`)) {
         axios
-          .post('http://localhost/skripsi/petugas/korban/delete', {
+          .post('https://skripsi-fauzan.000webhostapp.com/petugas/korban/delete', {
             id: id,
           })
           .then(() => {
@@ -487,7 +487,7 @@ export default {
     },
     getDataPosko() {
       axios
-        .get('http://localhost/skripsi/petugas/posko/get')
+        .get('https://skripsi-fauzan.000webhostapp.com/petugas/posko/get')
         .then((response) => {
           this.posko_options = response.data.map((json) => ({
             value: json.id,
@@ -502,7 +502,7 @@ export default {
     },
     getDataKorban() {
       axios
-        .get('http://localhost/skripsi/petugas/korban/get')
+        .get('https://skripsi-fauzan.000webhostapp.com/petugas/korban/get')
         .then((response) => {
           this.allItems = response.data.map((item, index) => {
             const posko = this.posko_options.find(

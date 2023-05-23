@@ -81,7 +81,7 @@ export default {
         alert('Password tidak boleh kosong')
       } else {
         axios
-          .get('http://localhost/skripsi/petugas/login', {
+          .get('https://skripsi-fauzan.000webhostapp.com/petugas/login', {
             params: {
               username: this.form.username,
               password: this.form.password,
