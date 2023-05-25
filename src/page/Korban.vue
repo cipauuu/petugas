@@ -326,7 +326,7 @@ export default {
         Object.values(this.formTambah)
           .filter((key) => key !== 'nik')
           .some((value) => value === '')
-      )
+      ) {
         if (!navigator.onLine) {
           const offlineData = {
             from: 'korban',
@@ -387,6 +387,7 @@ export default {
               }
             })
         }
+      }
     },
     clearFormTambah() {
       this.formTambah.nama = ''
