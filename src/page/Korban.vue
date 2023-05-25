@@ -322,71 +322,65 @@ export default {
       return value !== ''
     },
     submitFormTambah() {
-      if (
-        Object.values(this.formTambah)
-          .filter((key) => key !== 'nik')
-          .some((value) => value === '')
-      ) {
-        if (!navigator.onLine) {
-          const offlineData = {
-            from: 'korban',
-            type: 'post',
-            nama: this.formTambah.nama,
-            usia: this.formTambah.usia,
-            jenis_kelamin: this.formTambah.jenis_kelamin,
-            nik: this.formTambah.nik,
-            ciri_ciri: this.formTambah.ciri_ciri,
-            status: this.formTambah.status,
-            id_posko: this.formTambah.id_posko,
-          }
-
-          let offlineDataList = localStorage.getItem('offlineData')
-          if (offlineDataList) {
-            // Append new data to existing offline data
-            offlineDataList = JSON.parse(offlineDataList)
-            offlineDataList.push(offlineData)
-          } else {
-            // Create new offline data list
-            offlineDataList = [offlineData]
-          }
-
-          localStorage.setItem('offlineData', JSON.stringify(offlineDataList))
-          this.clearFormTambah()
-          alert(
-            'Internet anda bermasalah, Tambah Data korban telah ditambahkan ke Data Offline',
-          )
-        } else {
-          axios
-            .post(
-              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/post',
-              {
-                nama: this.formTambah.nama,
-                usia: this.formTambah.usia,
-                jenis_kelamin: this.formTambah.jenis_kelamin,
-                nik: this.formTambah.nik,
-                ciri_ciri: this.formTambah.ciri_ciri,
-                status: this.formTambah.status,
-                id_posko: this.formTambah.id_posko,
-              },
-              {
-                headers: {
-                  'Content-Type':
-                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
-                },
-              },
-            )
-            .then(() => {
-              alert('Data korban telah berhasil ditambah')
-              this.$router.go(0)
-            })
-            .catch((error) => {
-              if (error.response && error.response.status === 404) {
-                // Handle 404 Not Found error
-                console.log(error)
-                this.clearFormTambah()
-              }
-            })
+      if (!navigator.onLine) {
+        const offlineData = {
+          from: 'korban',
+          type: 'post',
+          nama: this.formTambah.nama,
+          usia: this.formTambah.usia,
+          jenis_kelamin: this.formTambah.jenis_kelamin,
+          nik: this.formTambah.nik,
+          ciri_ciri: this.formTambah.ciri_ciri,
+          status: this.formTambah.status,
+          id_posko: this.formTambah.id_posko,
         }
+
+        let offlineDataList = localStorage.getItem('offlineData')
+        if (offlineDataList) {
+          // Append new data to existing offline data
+          offlineDataList = JSON.parse(offlineDataList)
+          offlineDataList.push(offlineData)
+        } else {
+          // Create new offline data list
+          offlineDataList = [offlineData]
+        }
+
+        localStorage.setItem('offlineData', JSON.stringify(offlineDataList))
+        this.clearFormTambah()
+        alert(
+          'Internet anda bermasalah, Tambah Data korban telah ditambahkan ke Data Offline',
+        )
+      } else {
+        axios
+          .post(
+            'https://skripsi-fauzan.000webhostapp.com/petugas/korban/post',
+            {
+              nama: this.formTambah.nama,
+              usia: this.formTambah.usia,
+              jenis_kelamin: this.formTambah.jenis_kelamin,
+              nik: this.formTambah.nik,
+              ciri_ciri: this.formTambah.ciri_ciri,
+              status: this.formTambah.status,
+              id_posko: this.formTambah.id_posko,
+            },
+            {
+              headers: {
+                'Content-Type':
+                  'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+              },
+            },
+          )
+          .then(() => {
+            alert('Data korban telah berhasil ditambah')
+            this.$router.go(0)
+          })
+          .catch((error) => {
+            if (error.response && error.response.status === 404) {
+              // Handle 404 Not Found error
+              console.log(error)
+              this.clearFormTambah()
+            }
+          })
       }
     },
     clearFormTambah() {
@@ -411,73 +405,68 @@ export default {
       }
     },
     submitFormEdit() {
-      if (
-        Object.values(this.formTambah)
-          .filter((key) => key !== 'nik')
-          .some((value) => value === '')
-      )
-        if (!navigator.onLine) {
-          const offlineData = {
-            from: 'korban',
-            type: 'put',
-            id: this.formEdit.id,
-            nama: this.formEdit.nama,
-            usia: this.formEdit.usia,
-            jenis_kelamin: this.formEdit.jenis_kelamin,
-            nik: this.formEdit.nik,
-            ciri_ciri: this.formEdit.ciri_ciri,
-            status: this.formEdit.status,
-            id_posko: this.formEdit.id_posko,
-          }
-
-          let offlineDataList = localStorage.getItem('offlineData')
-          if (offlineDataList) {
-            // Append new data to existing offline data
-            offlineDataList = JSON.parse(offlineDataList)
-            offlineDataList.push(offlineData)
-          } else {
-            // Create new offline data list
-            offlineDataList = [offlineData]
-          }
-
-          localStorage.setItem('offlineData', JSON.stringify(offlineDataList))
-          this.clearFormEdit()
-          alert(
-            'Internet anda bermasalah, Ubah Data korban telah ditambahkan ke Data Offline',
-          )
-        } else {
-          axios
-            .put(
-              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/put',
-              {
-                id: this.formEdit.id,
-                nama: this.formEdit.nama,
-                usia: this.formEdit.usia,
-                jenis_kelamin: this.formEdit.jenis_kelamin,
-                nik: this.formEdit.nik,
-                ciri_ciri: this.formEdit.ciri_ciri,
-                status: this.formEdit.status,
-                id_posko: this.formEdit.id_posko,
-              },
-              {
-                headers: {
-                  'Content-Type':
-                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
-                },
-              },
-            )
-            .then(() => {
-              alert('Data korban telah berhasil diubah')
-              this.$router.go(0)
-            })
-            .catch((error) => {
-              if (error.response && error.response.status === 404) {
-                // Handle 404 Not Found error
-                console.log(error)
-                this.clearFormEdit()
-              }
-            })
+      if (!navigator.onLine) {
+        const offlineData = {
+          from: 'korban',
+          type: 'put',
+          id: this.formEdit.id,
+          nama: this.formEdit.nama,
+          usia: this.formEdit.usia,
+          jenis_kelamin: this.formEdit.jenis_kelamin,
+          nik: this.formEdit.nik,
+          ciri_ciri: this.formEdit.ciri_ciri,
+          status: this.formEdit.status,
+          id_posko: this.formEdit.id_posko,
         }
+
+        let offlineDataList = localStorage.getItem('offlineData')
+        if (offlineDataList) {
+          // Append new data to existing offline data
+          offlineDataList = JSON.parse(offlineDataList)
+          offlineDataList.push(offlineData)
+        } else {
+          // Create new offline data list
+          offlineDataList = [offlineData]
+        }
+
+        localStorage.setItem('offlineData', JSON.stringify(offlineDataList))
+        this.clearFormEdit()
+        alert(
+          'Internet anda bermasalah, Ubah Data korban telah ditambahkan ke Data Offline',
+        )
+      } else {
+        axios
+          .put(
+            'https://skripsi-fauzan.000webhostapp.com/petugas/korban/put',
+            {
+              id: this.formEdit.id,
+              nama: this.formEdit.nama,
+              usia: this.formEdit.usia,
+              jenis_kelamin: this.formEdit.jenis_kelamin,
+              nik: this.formEdit.nik,
+              ciri_ciri: this.formEdit.ciri_ciri,
+              status: this.formEdit.status,
+              id_posko: this.formEdit.id_posko,
+            },
+            {
+              headers: {
+                'Content-Type':
+                  'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+              },
+            },
+          )
+          .then(() => {
+            alert('Data korban telah berhasil diubah')
+            this.$router.go(0)
+          })
+          .catch((error) => {
+            if (error.response && error.response.status === 404) {
+              // Handle 404 Not Found error
+              console.log(error)
+              this.clearFormEdit()
+            }
+          })
+      }
     },
     clearFormEdit() {
       this.formTambah.nama_posko = ''
