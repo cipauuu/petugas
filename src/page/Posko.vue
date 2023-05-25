@@ -390,9 +390,10 @@ export default {
         )
       } else {
         axios
-          .put(
-            'https://skripsi-fauzan.000webhostapp.com/petugas/posko/put',
-            {
+          .request({
+            url: 'https://skripsi-fauzan.000webhostapp.com/petugas/posko/put',
+            method: 'PUT',
+            data: {
               posko_id: this.formEdit.id,
               nama_posko: this.formEdit.nama_posko,
               nama_pj_posko: this.formEdit.nama_pj_posko,
@@ -400,13 +401,11 @@ export default {
               alamat_posko: this.formEdit.alamat_posko,
               gmaps_posko: this.formEdit.gmaps_posko,
             },
-            {
-              headers: {
-                'Content-Type':
-                  'application/x-www-form-urlencoded;charset=UTF-8,application/json',
-              },
+            headers: {
+              'Content-Type':
+                'application/x-www-form-urlencoded;charset=UTF-8,application/json',
             },
-          )
+          })
           .then(() => {
             alert('Data posko telah berhasil diubah')
             this.$router.go(0)
