@@ -325,11 +325,7 @@ export default {
             this.$router.go(0)
           })
           .catch((error) => {
-            if (error.response && error.response.status === 404) {
-              // Handle 404 Not Found error
-              console.log(error)
-              this.clearFormTambah()
-            }
+            console.log(error)
           })
       }
     },
