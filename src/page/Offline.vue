@@ -190,14 +190,23 @@ export default {
       } else {
         if (item.type === 'put') {
           axios
-            .put('https://skripsi-fauzan.000webhostapp.com/petugas/posko/put', {
-              posko_id: item.id,
-              nama_posko: item.nama_posko,
-              nama_pj_posko: item.nama_pj_posko,
-              hp_pj_posko: item.hp_pj_posko,
-              alamat_posko: item.alamat_posko,
-              gmaps_posko: item.gmaps_posko,
-            })
+            .put(
+              'https://skripsi-fauzan.000webhostapp.com/petugas/posko/put',
+              {
+                posko_id: item.id,
+                nama_posko: item.nama_posko,
+                nama_pj_posko: item.nama_pj_posko,
+                hp_pj_posko: item.hp_pj_posko,
+                alamat_posko: item.alamat_posko,
+                gmaps_posko: item.gmaps_posko,
+              },
+              {
+                headers: {
+                  'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+                },
+              },
+            )
             .then(() => {
               alert('Data posko telah berhasil diubah')
               this.deleteData(item) // Pass the modified item to deleteData()
@@ -211,13 +220,22 @@ export default {
             })
         } else if (item.type === 'post') {
           axios
-            .post('https://skripsi-fauzan.000webhostapp.com/petugas/posko/post', {
-              nama_posko: item.nama_posko,
-              nama_pj_posko: item.nama_pj_posko,
-              hp_pj_posko: item.hp_pj_posko,
-              alamat_posko: item.alamat_posko,
-              gmaps_posko: item.gmaps_posko,
-            })
+            .post(
+              'https://skripsi-fauzan.000webhostapp.com/petugas/posko/post',
+              {
+                nama_posko: item.nama_posko,
+                nama_pj_posko: item.nama_pj_posko,
+                hp_pj_posko: item.hp_pj_posko,
+                alamat_posko: item.alamat_posko,
+                gmaps_posko: item.gmaps_posko,
+              },
+              {
+                headers: {
+                  'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+                },
+              },
+            )
             .then((error) => {
               alert('Data posko telah berhasil ditambah')
               this.deleteData(item) // Pass the modified item to deleteData()
@@ -239,16 +257,25 @@ export default {
       } else {
         if (item.type === 'put') {
           axios
-            .put('https://skripsi-fauzan.000webhostapp.com/petugas/korban/put', {
-              id: item.id,
-              nama: item.nama,
-              usia: item.usia,
-              jenis_kelamin: item.jenis_kelamin,
-              nik: item.nik,
-              ciri_ciri: item.ciri_ciri,
-              status: item.status,
-              id_posko: item.id_posko,
-            })
+            .put(
+              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/put',
+              {
+                id: item.id,
+                nama: item.nama,
+                usia: item.usia,
+                jenis_kelamin: item.jenis_kelamin,
+                nik: item.nik,
+                ciri_ciri: item.ciri_ciri,
+                status: item.status,
+                id_posko: item.id_posko,
+              },
+              {
+                headers: {
+                  'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+                },
+              },
+            )
             .then(() => {
               alert('Data korban telah berhasil diubah')
               this.deleteData(item) // Pass the modified item to deleteData()
@@ -262,15 +289,24 @@ export default {
             })
         } else if (item.type === 'post') {
           axios
-            .post('https://skripsi-fauzan.000webhostapp.com/petugas/korban/post', {
-              nama: item.nama,
-              usia: item.usia,
-              jenis_kelamin: item.jenis_kelamin,
-              nik: item.nik,
-              ciri_ciri: item.ciri_ciri,
-              status: item.status,
-              id_posko: item.id_posko,
-            })
+            .post(
+              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/post',
+              {
+                nama: item.nama,
+                usia: item.usia,
+                jenis_kelamin: item.jenis_kelamin,
+                nik: item.nik,
+                ciri_ciri: item.ciri_ciri,
+                status: item.status,
+                id_posko: item.id_posko,
+              },
+              {
+                headers: {
+                  'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+                },
+              },
+            )
             .then(() => {
               alert('Data korban telah berhasil ditambah')
               this.deleteData(item) // Pass the modified item to deleteData()

@@ -357,15 +357,24 @@ export default {
           )
         } else {
           axios
-            .post('https://skripsi-fauzan.000webhostapp.com/petugas/korban/post', {
-              nama: this.formTambah.nama,
-              usia: this.formTambah.usia,
-              jenis_kelamin: this.formTambah.jenis_kelamin,
-              nik: this.formTambah.nik,
-              ciri_ciri: this.formTambah.ciri_ciri,
-              status: this.formTambah.status,
-              id_posko: this.formTambah.id_posko,
-            })
+            .post(
+              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/post',
+              {
+                nama: this.formTambah.nama,
+                usia: this.formTambah.usia,
+                jenis_kelamin: this.formTambah.jenis_kelamin,
+                nik: this.formTambah.nik,
+                ciri_ciri: this.formTambah.ciri_ciri,
+                status: this.formTambah.status,
+                id_posko: this.formTambah.id_posko,
+              },
+              {
+                headers: {
+                  'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+                },
+              },
+            )
             .then(() => {
               alert('Data korban telah berhasil ditambah')
               this.$router.go(0)
@@ -437,16 +446,25 @@ export default {
           )
         } else {
           axios
-            .put('https://skripsi-fauzan.000webhostapp.com/petugas/korban/put', {
-              id: this.formEdit.id,
-              nama: this.formEdit.nama,
-              usia: this.formEdit.usia,
-              jenis_kelamin: this.formEdit.jenis_kelamin,
-              nik: this.formEdit.nik,
-              ciri_ciri: this.formEdit.ciri_ciri,
-              status: this.formEdit.status,
-              id_posko: this.formEdit.id_posko,
-            })
+            .put(
+              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/put',
+              {
+                id: this.formEdit.id,
+                nama: this.formEdit.nama,
+                usia: this.formEdit.usia,
+                jenis_kelamin: this.formEdit.jenis_kelamin,
+                nik: this.formEdit.nik,
+                ciri_ciri: this.formEdit.ciri_ciri,
+                status: this.formEdit.status,
+                id_posko: this.formEdit.id_posko,
+              },
+              {
+                headers: {
+                  'Content-Type':
+                    'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+                },
+              },
+            )
             .then(() => {
               alert('Data korban telah berhasil diubah')
               this.$router.go(0)
@@ -470,9 +488,18 @@ export default {
     submitFormDelete(id, name) {
       if (confirm(`Anda yakin untuk menghapus data ${name} ini?`)) {
         axios
-          .post('https://skripsi-fauzan.000webhostapp.com/petugas/korban/delete', {
-            id: id,
-          })
+          .post(
+            'https://skripsi-fauzan.000webhostapp.com/petugas/korban/delete',
+            {
+              id: id,
+            },
+            {
+              headers: {
+                'Content-Type':
+                  'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+              },
+            },
+          )
           .then(() => {
             alert(`Data ${name} telah dihapus`)
             this.$router.go(0)
