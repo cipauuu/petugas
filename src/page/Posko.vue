@@ -313,13 +313,22 @@ export default {
         )
       } else {
         axios
-          .post('https://skripsi-fauzan.000webhostapp.com/petugas/posko/post', {
-            nama_posko: this.formTambah.nama_posko,
-            nama_pj_posko: this.formTambah.nama_pj_posko,
-            hp_pj_posko: this.formTambah.hp_pj_posko,
-            alamat_posko: this.formTambah.alamat_posko,
-            gmaps_posko: this.formTambah.gmaps_posko,
-          })
+          .post(
+            'https://skripsi-fauzan.000webhostapp.com/petugas/posko/post',
+            {
+              nama_posko: this.formTambah.nama_posko,
+              nama_pj_posko: this.formTambah.nama_pj_posko,
+              hp_pj_posko: this.formTambah.hp_pj_posko,
+              alamat_posko: this.formTambah.alamat_posko,
+              gmaps_posko: this.formTambah.gmaps_posko,
+            },
+            {
+              headers: {
+                'Content-Type':
+                  'application/x-www-form-urlencoded;charset=UTF-8,application/json',
+              },
+            },
+          )
           .then(() => {
             alert('Data posko telah berhasil ditambah')
             this.$router.go(0)
@@ -412,9 +421,12 @@ export default {
     submitFormDelete(id, name) {
       if (confirm(`Anda yakin untuk menghapus data ${name} ini?`)) {
         axios
-          .post('https://skripsi-fauzan.000webhostapp.com/petugas/posko/delete', {
-            id: id,
-          })
+          .post(
+            'https://skripsi-fauzan.000webhostapp.com/petugas/posko/delete',
+            {
+              id: id,
+            },
+          )
           .then(() => {
             alert(`Data ${name} telah dihapus`)
             this.$router.go(0)
