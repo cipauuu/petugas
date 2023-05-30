@@ -19,12 +19,7 @@
             class="mb-2"
             @click="goToPage('posko')"
           >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </b-card-text>
-
-            <b-button variant="primary">Go somewhere</b-button>
+            <b-button variant="primary">Halaman Posko</b-button>
           </b-card>
         </b-col>
 
@@ -39,12 +34,7 @@
             class="mb-2"
             @click="goToPage('korban')"
           >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </b-card-text>
-
-            <b-button variant="primary">Go somewhere</b-button>
+            <b-button variant="primary">Halaman Korban</b-button>
           </b-card>
         </b-col>
 
@@ -59,12 +49,7 @@
             class="mb-2"
             @click="goToPage('offline')"
           >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </b-card-text>
-
-            <b-button variant="primary">Go somewhere</b-button>
+            <b-button variant="primary">Halaman Offline</b-button>
           </b-card>
         </b-col>
       </b-row>

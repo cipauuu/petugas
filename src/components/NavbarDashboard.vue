@@ -28,6 +28,14 @@
           >
             Data Offline
           </b-nav-item>
+          <b-nav-item class="network-status" disabled>
+            <b-badge :variant="networkStatus ? 'success' : 'danger'">
+              Status Jaringan:
+              <b>
+                {{ networkStatus ? 'Online' : 'Offline' }}
+              </b>
+            </b-badge>
+          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -49,17 +57,21 @@
 import { BNavbar } from 'bootstrap-vue'
 
 export default {
-  name: 'NavbarLogin',
+  name: 'NavbarDashboard',
   components: {
     BNavbar,
   },
   data() {
     return {
       username: '',
+      networkStatus: true
     }
   },
   mounted() {
+    this.checkNetworkStatus
     this.username = localStorage.getItem('username')
+
+    setInterval(this.checkNetworkStatus, 1000);
   },
   methods: {
     goToPage(value) {
@@ -69,6 +81,9 @@ export default {
       localStorage.removeItem('loggedIn')
       this.$router.push('/')
     },
+    checkNetworkStatus() {
+      this.networkStatus = navigator.onLine;
+    }
   },
 }
 </script>
@@ -76,5 +91,9 @@ export default {
 <style scoped>
 .navbar-brand:hover {
   cursor: pointer;
+}
+
+.network-status {
+  pointer-events: none;
 }
 </style>
