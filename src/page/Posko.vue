@@ -42,6 +42,9 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 Ubah
               </b-button>
+
+              <br />
+              
               <b-button
                 size="sm"
                 @click="submitFormDelete(row.item.id, row.item.nama_posko)"
@@ -264,7 +267,11 @@ export default {
   mounted() {
     localStorage.getItem('loggedIn') !== 'true' ? this.$router.push('/') : ''
 
-    this.getDataPosko()
+    if (navigator.onLine) {
+      this.getDataPosko()
+    } else {
+      this.getDataOffline()
+    }
   },
   methods: {
     truncateText(text, maxLength) {
@@ -314,7 +321,7 @@ export default {
       } else {
         axios
           .post(
-            'https://skripsi-fauzan.000webhostapp.com/petugas/posko/post',
+            'http://localhost/website/petugas/posko/post',
             {
               nama_posko: this.formTambah.nama_posko,
               nama_pj_posko: this.formTambah.nama_pj_posko,
@@ -391,7 +398,7 @@ export default {
       } else {
         axios
           .put(
-            'https://skripsi-fauzan.000webhostapp.com/petugas/posko/put',
+            'http://localhost/website/petugas/posko/put',
             {
               posko_id: this.formEdit.id,
               nama_posko: this.formEdit.nama_posko,
@@ -431,7 +438,7 @@ export default {
       if (confirm(`Anda yakin untuk menghapus data ${name} ini?`)) {
         axios
           .post(
-            'https://skripsi-fauzan.000webhostapp.com/petugas/posko/delete',
+            'http://localhost/website/petugas/posko/delete',
             {
               id: id,
             },
@@ -456,7 +463,7 @@ export default {
     },
     getDataPosko() {
       axios
-        .get('https://skripsi-fauzan.000webhostapp.com/petugas/posko/get')
+        .get('http://localhost/website/petugas/posko/get')
         .then((response) => {
           this.allItems = response.data.map((item, index) => {
             return {
@@ -464,6 +471,9 @@ export default {
               no: index + 1,
             }
           })
+
+          localStorage.setItem('currentPoskoData', JSON.stringify(response.data))
+
           this.totalPages = Math.ceil(this.allItems.length / this.limit)
           this.currentPage = 1
           this.updateDisplayItems()
@@ -471,6 +481,18 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    getDataOffline() {
+      this.allItems = JSON.parse(localStorage.getItem('currentPoskoData')).map((item, index) => {
+        return {
+          ...item,
+          no: index + 1,
+        }
+      })
+
+      this.totalPages = Math.ceil(this.allItems.length / this.limit)
+      this.currentPage = 1
+      this.updateDisplayItems()
     },
     changePage(page) {
       this.currentPage = page

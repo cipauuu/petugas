@@ -46,6 +46,9 @@
                           <i class="fa fa-check" aria-hidden="true"></i>
                           Kirim
                         </b-button>
+
+                        <br />
+
                         <b-button
                           size="sm"
                           @click="submitFormDelete(row.item)"
@@ -85,6 +88,9 @@
                           <i class="fa fa-check" aria-hidden="true"></i>
                           Kirim
                         </b-button>
+
+                        <br />
+                        
                         <b-button
                           size="sm"
                           @click="submitFormDelete(row.item)"
@@ -191,7 +197,7 @@ export default {
         if (item.type === 'put') {
           axios
             .put(
-              'https://skripsi-fauzan.000webhostapp.com/petugas/posko/put',
+              'http://localhost/website/petugas/posko/put',
               {
                 posko_id: item.id,
                 nama_posko: item.nama_posko,
@@ -221,7 +227,7 @@ export default {
         } else if (item.type === 'post') {
           axios
             .post(
-              'https://skripsi-fauzan.000webhostapp.com/petugas/posko/post',
+              'http://localhost/website/petugas/posko/post',
               {
                 nama_posko: item.nama_posko,
                 nama_pj_posko: item.nama_pj_posko,
@@ -258,7 +264,7 @@ export default {
         if (item.type === 'put') {
           axios
             .put(
-              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/put',
+              'http://localhost/website/petugas/korban/put',
               {
                 id: item.id,
                 nama: item.nama,
@@ -290,7 +296,7 @@ export default {
         } else if (item.type === 'post') {
           axios
             .post(
-              'https://skripsi-fauzan.000webhostapp.com/petugas/korban/post',
+              'http://localhost/website/petugas/korban/post',
               {
                 nama: item.nama,
                 usia: item.usia,

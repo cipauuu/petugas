@@ -36,6 +36,9 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 Ubah
               </b-button>
+
+              <br />
+              
               <b-button
                 size="sm"
                 @click="submitFormDelete(row.item.id, row.item.nama)"
@@ -309,7 +312,12 @@ export default {
   },
   mounted() {
     localStorage.getItem('loggedIn') !== 'true' ? this.$router.push('/') : ''
-    this.getDataPosko()
+
+    if (navigator.onLine) {
+      this.getDataPosko()
+    } else {
+      this.getDataPoskoOffline()
+    }
   },
   methods: {
     usernameEnter() {
@@ -353,7 +361,7 @@ export default {
       } else {
         axios
           .post(
-            'https://skripsi-fauzan.000webhostapp.com/petugas/korban/post',
+            'http://localhost/website/petugas/korban/post',
             {
               nama: this.formTambah.nama,
               usia: this.formTambah.usia,
@@ -370,8 +378,9 @@ export default {
               },
             },
           )
-          .then(() => {
+          .then((response) => {
             alert('Data korban telah berhasil ditambah')
+            console.log(response.data)
             this.$router.go(0)
           })
           .catch((error) => {
@@ -437,7 +446,7 @@ export default {
       } else {
         axios
           .put(
-            'https://skripsi-fauzan.000webhostapp.com/petugas/korban/put',
+            'http://localhost/website/petugas/korban/put',
             {
               id: this.formEdit.id,
               nama: this.formEdit.nama,
@@ -479,7 +488,7 @@ export default {
       if (confirm(`Anda yakin untuk menghapus data ${name} ini?`)) {
         axios
           .post(
-            'https://skripsi-fauzan.000webhostapp.com/petugas/korban/delete',
+            'http://localhost/website/petugas/korban/delete',
             {
               id: id,
             },
@@ -504,12 +513,17 @@ export default {
     },
     getDataPosko() {
       axios
-        .get('https://skripsi-fauzan.000webhostapp.com/petugas/posko/get')
+        .get('http://localhost/website/petugas/posko/get')
         .then((response) => {
           this.posko_options = response.data.map((json) => ({
             value: json.id,
             text: json.nama_posko,
           }))
+
+          localStorage.setItem(
+            'currentPoskoData',
+            JSON.stringify(response.data),
+          )
 
           this.getDataKorban()
         })
@@ -517,9 +531,38 @@ export default {
           console.log(error)
         })
     },
+    getDataPoskoOffline() {
+      this.posko_options = JSON.parse(
+        localStorage.getItem('currentPoskoData'),
+      ).map((json) => ({
+        value: json.id,
+        text: json.nama_posko,
+      }))
+
+      this.getDataKorbanOffline()
+    },
+    getDataKorbanOffline() {
+      this.allItems = JSON.parse(localStorage.getItem('currentKorbanData')).map(
+        (item, index) => {
+          const posko = this.posko_options.find(
+            (posko) => posko.value === item.id_posko,
+          )
+          const lokasiPosko = posko ? posko.text : ''
+          return {
+            ...item,
+            no: index + 1,
+            lokasi: lokasiPosko,
+          }
+        },
+      )
+
+      this.totalPages = Math.ceil(this.allItems.length / this.limit)
+      this.currentPage = 1
+      this.updateDisplayItems()
+    },
     getDataKorban() {
       axios
-        .get('https://skripsi-fauzan.000webhostapp.com/petugas/korban/get')
+        .get('http://localhost/website/petugas/korban/get')
         .then((response) => {
           this.allItems = response.data.map((item, index) => {
             const posko = this.posko_options.find(
@@ -532,6 +575,12 @@ export default {
               lokasi: lokasiPosko,
             }
           })
+
+          localStorage.setItem(
+            'currentKorbanData',
+            JSON.stringify(response.data),
+          )
+
           this.totalPages = Math.ceil(this.allItems.length / this.limit)
           this.currentPage = 1
           this.updateDisplayItems()
